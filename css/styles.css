@@ -772,7 +772,7 @@ form p {
   padding: 0 0 5px 5px;
 }
 .btn.white {
-  background: #FFF;
+  background: #fff;
   box-shadow: none;
   color: #202020;
   text-decoration: none;
@@ -1441,7 +1441,3 @@ turquoise
   background-color: #3498db;
 }
 /*-----  End of Colors  ------*/
-
-#bm {
-  position: absolute;
-}
