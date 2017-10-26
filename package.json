@@ -1,0 +1,22 @@
+{
+  "name": "oddball",
+  "version": "1.0.0",
+  "description": "A digital Agency",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jorgehjr84/oddball.git"
+  },
+  "author": "Jorge Hernandez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jorgehjr84/oddball/issues"
+  },
+  "homepage": "https://github.com/jorgehjr84/oddball#readme",
+  "dependencies": {
+    "animate.css": "^3.5.2"
+  }
+}
