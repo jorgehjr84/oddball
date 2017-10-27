@@ -1442,25 +1442,8 @@ turquoise
 }
 /*-----  End of Colors  ------*/
 #bm {
-  position: relative;
-  bottom: 100px;
+  height: 83%;
 }
-/*
-#bm > svg {
-  height: 196vh !important;
-}*/
 .creating-button {
-  animation-delay: 5s;
+  animation-delay: 5s; 
 }
-
-/*.subtext {
-  position: absolute;
-  top: 530px;
-  width: 100%;
-}
-
-@media (min-width: 1280px) {
- #bm > svg {
-  height: 127vh !important;
-  }
-}*/
