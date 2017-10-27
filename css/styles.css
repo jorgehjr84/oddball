@@ -112,8 +112,8 @@ section {
   padding-bottom: 60px;
 }
 .padding-top-bottom {
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 315px;
+  padding-bottom: 315px;
 }
 .nopadding {
   margin: 0 !important;
@@ -1442,17 +1442,18 @@ turquoise
 }
 /*-----  End of Colors  ------*/
 #bm {
-  position: absolute;
-  top: -600px;
+  position: relative;
+  bottom: 100px;
 }
+/*
 #bm > svg {
   height: 196vh !important;
-}
+}*/
 .creating-button {
   animation-delay: 5s;
 }
 
-.subtext {
+/*.subtext {
   position: absolute;
   top: 530px;
   width: 100%;
@@ -1462,4 +1463,4 @@ turquoise
  #bm > svg {
   height: 127vh !important;
   }
-}
+}*/
