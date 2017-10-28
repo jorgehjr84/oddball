@@ -1444,6 +1444,32 @@ turquoise
 #bm {
   height: 83%;
 }
-.creating-button {
+#bm > svg {
+  position: relative;
+  bottom: 25vh;
+}
+#sub-content {
+  position: absolute;
+  bottom: 9vh;
+  left: auto;
+  right: auto;
+  width: 100%;
+}
+#sub-content > h2 {
+  margin-bottom: 30px;
+}
+#sub-content > a {
   animation-delay: 5s; 
+}
+
+@media (max-width: 768px) {
+  #sub-content > h2 {
+    font-size: 23px;
+  }
+}
+
+@media (max-width: 414px) {
+  #sub-content > h2 {
+    font-size: 18px;
+  }
 }
