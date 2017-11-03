@@ -1441,6 +1441,8 @@ turquoise
   background-color: #3498db;
 }
 /*-----  End of Colors  ------*/
+
+/*Landing Page Styles*/
 #bm {
   height: 83%;
 }
@@ -1462,6 +1464,16 @@ turquoise
   animation-delay: 5s; 
 }
 
+/*About Us Styles*/
+.about-us-text{
+  text-align: left;
+}
+
+#contact {
+  padding-top: 110px;
+  padding-bottom: 126px;
+}
+
 @media (max-width: 768px) {
   #sub-content > h2 {
     font-size: 23px;
@@ -1471,5 +1483,21 @@ turquoise
 @media (max-width: 414px) {
   #sub-content > h2 {
     font-size: 18px;
+  }
+}
+
+@media (max-width: 998px) {
+  .about-us-text > h2 {
+    font-size: 33px;
+  }
+}
+@media (max-width: 749px) {
+  .about-us-text > h2 {
+    font-size: 25px;
+  }
+}
+@media (max-width: 575px) {
+  .about-us-text > h2 {
+    font-size: 22px;
   }
 }
