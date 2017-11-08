@@ -1473,6 +1473,13 @@ turquoise
   padding-top: 110px;
   padding-bottom: 126px;
 }
+.lightbulb-image{
+    float: right;
+    height: 19vh;
+    position: relative;
+    bottom: 26vh;
+}
+
 
 @media (max-width: 768px) {
   #sub-content > h2 {
@@ -1486,14 +1493,24 @@ turquoise
   }
 }
 
+/*About us queries */
 @media (max-width: 998px) {
   .about-us-text > h2 {
     font-size: 33px;
   }
 }
+@media (max-width: 1038px) {
+  .lightbulb-image {
+    float: none;
+    height: 19vh;
+    position: relative;
+    top: 3vh;
+  }
+}
 @media (max-width: 749px) {
   .about-us-text > h2 {
     font-size: 25px;
+    text-align: center;
   }
 }
 @media (max-width: 575px) {
