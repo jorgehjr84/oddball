@@ -115,6 +115,10 @@ section {
   padding-top: 315px;
   padding-bottom: 315px;
 }
+.updated-padding-top-bottom {
+  padding-top: 150px;
+  padding-bottom: 315px;
+}
 .nopadding {
   margin: 0 !important;
   padding: 0 !important;
@@ -956,13 +960,16 @@ blockquote,
 /*================================
 =            Features            =
 ================================*/
+#features {
+  background-color: #b3a78c;
+}
 .features-1 article {
   margin: 0px 0px 60px 0px;
   padding: 0px 10px;
 }
 .features-1 article .fa {
   font-size: 32px;
-  color: #b3a78c;
+  color: black;
 }
 .features-1 article h3 {
   font-size: 17px;
@@ -972,7 +979,7 @@ blockquote,
 }
 .features-1 article p {
   font-size: 15px;
-  color: #b6b6b6;
+  color: black;
 }
 .features-1 article .zoom-img {
   border-radius: 50%;
