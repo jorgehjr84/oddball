@@ -1,39 +1,103 @@
+
 <?php
-/*======================================
-=            PHP send email            =
-======================================*/
-
-$email = "your@email.com"; /* add your email */
-
-$headerFields = array(
-  "From: your@email.com", /* add your email */
-  "MIME-Version: 1.0",
-  "Content-Type: text/html;charset=utf-8"
-);
-
-$log_data['ip'] = $_SERVER['HTTP_X_REAL_IP'];
-$log_data['userAgent'] = $_SERVER["HTTP_USER_AGENT"];
-$log_data['post_data'] = $_POST;
+require_once __DIR__ . '/vendor/autoload.php';
 
 
-if (isset($_POST['comments'])) {
+define('APPLICATION_NAME', 'Google Sheets API PHP Quickstart');
+define('CREDENTIALS_PATH', '~/.credentials/oddballCreds1.json');
+define('CLIENT_SECRET_PATH', __DIR__ . '/client_secret.json');
+// If modifying these scopes, delete your previously saved credentials
+// at ~/.credentials/sheets.googleapis.com-php-quickstart.json
+define('SCOPES', implode(' ', array(
+  'https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/drive.apps.readonly')
+));
 
-  $mailText = '
-  IP: '.$log_data['ip'].'<br />
-  User agent: '.$log_data['userAgent'].'<br />
-  ContactName: '.$_POST['contactName'].'<br />
-  Email: '.$_POST['email'].'<br />
-  Comments: '.$_POST['comments'].'<br />
-  ';
+/**
+ * Returns an authorized API client.
+ * @return Google_Client the authorized client object
+ */
+function getClient() {
+  $client = new Google_Client();
+  $client->setApplicationName(APPLICATION_NAME);
+  $client->setScopes(SCOPES);
+  $client->setAuthConfig(CLIENT_SECRET_PATH);
+  $client->setAccessType('offline');
 
-  if ( mail($email, 'Contact form webpage 1E-shop by www.angelostudio.net.', $mailText, implode("\r\n", $headerFields) ) ) {
-    error_log(serialize($log_data)."\n", 3, '_log/contact.log');
+  // Load previously authorized credentials from a file.
+  $credentialsPath = expandHomeDirectory(CREDENTIALS_PATH);
+  if (file_exists($credentialsPath)) {
+    $accessToken = json_decode(file_get_contents($credentialsPath), true);
   } else {
-    error_log(serialize($log_data)."\n", 3, '_log/contact_error.log');
-  }
+    // Request authorization from the user.
+    $authUrl = $client->createAuthUrl();
+    printf("Open the following link in your browser:\n%s\n", $authUrl);
+    print 'Enter verification code: ';
+    $authCode = 'REPLACE WITH AUTH CODE';
 
+    // Exchange authorization code for an access token.
+    $accessToken = $client->fetchAccessTokenWithAuthCode($authCode);
+
+    // Store the credentials to disk.
+    if(!file_exists(dirname($credentialsPath))) {
+      mkdir(dirname($credentialsPath), 0700, true);
+    }
+    file_put_contents($credentialsPath, json_encode($accessToken));
+    printf("Credentials saved to %s\n", $credentialsPath);
+  }
+  $client->setAccessToken($accessToken);
+
+  // Refresh the token if it's expired.
+  if ($client->isAccessTokenExpired()) {
+    $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
+    file_put_contents($credentialsPath, json_encode($client->getAccessToken()));
+  }
+  return $client;
 }
 
-/*-----  End of PHP send email  ------*/
+/**
+ * Expands the home directory alias '~' to the full path.
+ * @param string $path the path to expand.
+ * @return string the expanded path.
+ */
+function expandHomeDirectory($path) {
+  $homeDirectory = getenv('HOME');
+  if (empty($homeDirectory)) {
+    $homeDirectory = getenv('HOMEDRIVE') . getenv('HOMEPATH');
+  }
+  return str_replace('~', realpath($homeDirectory), $path);
+}
 
+// Get the API client and construct the service object.
+$client = getClient();
+$service = new Google_Service_Sheets($client);
+
+$spreadsheetId = '1RmVuhEpvQRn-xu6h-6u68nv9wHSaliGeajOUBlpjaiY';
+$range = 'Sheet1!A3:C70';
+$valueInputOption = 'RAW';
+
+if (isset($_POST['comments'])) {
+  $name = $_POST['contactName'];
+  $email = $_POST['email'];
+  $message = $_POST['comments'];
+
+  $values = array(["values" => [ $name, $email, $message]]);
+
+  $body = new Google_Service_Sheets_ValueRange(array(
+    'values' => $values
+  ));
+
+  $params = array(
+    'valueInputOption' => $valueInputOption
+  );
+
+  $result = $service->spreadsheets_values->append($spreadsheetId, $range,
+      $body, $params);
+
+
+  $response = $service->spreadsheets_values->get($spreadsheetId, $range);
+  echo '<pre>', var_export($response, true), '</pre>', "\n";
+
+}
+  
+/*-----  End of PHP send email  ------*/
 ?>

@@ -1311,7 +1311,7 @@ blockquote,
 .parallax-container {
   position: relative;
   overflow: hidden;
-  height: 500px;
+  height: 900px;
 }
 .parallax {
   position: absolute;
@@ -1491,6 +1491,11 @@ turquoise
 @media (max-width: 768px) {
   #sub-content > h2 {
     font-size: 23px;
+  }
+  #sub-content > h2 > b {
+    position: relative;
+    top: 1vh;
+
   }
 }
 
